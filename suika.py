@@ -1,16 +1,19 @@
 import math
 import random
 BOARD_SIZE = 10
-suika = (random.randrange(0, BOARD_SIZE), random.randrange(0, BOARD_SIZE))
-player = (random.randrange(0, BOARD_SIZE), random.randrange(0, BOARD_SIZE))
-
 CLEAR_MESSAGE = 'Congratulations on the correct answer'
 
-while (player != suika):
+def generate_position(size):
+    x = random.randrange(0, size)
+    y = random.randrange(0, size)
+    return (x, y)
+
+def suika_player_distance(suika, player):
     dx = suika[0] - player[0]
     dy = suika[1] - player[1]
-    distance = math.sqrt(dx**2 + dy**2)
-    print('プレイヤーとスイカの距離', distance)
+    return math.sqrt(dx**2 + dy**2)
+
+def move_direction(player):
     move = input('N:北へ一歩　E:東へ一歩　S:南へ一歩　W:西へ一歩 どちらに動くか入力してください')
     player_x, player_y = player
     if(move == 'N'):
@@ -23,7 +26,13 @@ while (player != suika):
         player_x = player_x - 1
     else:
         print('大文字のNESWで入力してください')
-    
-    player = (player_x, player_y)
+    return(player_x, player_y)
 
-print(CLEAR_MESSAGE)
+def suika_wari():
+    suika = generate_position(BOARD_SIZE)
+    player = generate_position(BOARD_SIZE)
+    while (player != suika):
+        distance = suika_player_distance(suika, player)
+        print('プレイヤーとスイカの距離', distance)
+        player = move_direction(player)
+    print(CLEAR_MESSAGE)
