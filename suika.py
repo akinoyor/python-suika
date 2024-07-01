@@ -4,16 +4,24 @@ suikaX = random.randrange(0, 10)
 suikaY = random.randrange(0, 10)
 playerX = random.randrange(0, 10)
 playerY = random.randrange(0, 10)
-suika = [suikaX, suikaY]#仮設定　最終的にはRandamを用いて行う
-player = [playerX, playerY]#プレイヤー初期値
+
 clearMessage = 'Congratulations on the correct answer'
 
-print(player == suika)
-while player != suika:
-    dx = suika[0] - player[0]
-    dy = suika[1] - player[1]
-    print(dx, dy)
+while (playerX != suikaX)or(playerY != suikaY):
+    dx = suikaX - playerX
+    dy = suikaY - playerY
     distance = math.sqrt(dx**2 + dy**2)
     print(distance)
+    move = input('N:北へ一歩　E:東へ一歩　S:南へ一歩　W:西へ一歩')
+    if(move == 'N'):
+        playerY = playerY + 1
+    elif(move == 'E'):
+        playerX = playerX +11
+    elif(move == 'S'):
+        playerY = playerY -1
+    elif(move == 'W'):
+        playerX = playerX -1
+    else:
+        print('大文字のNESWで入力してください')
 
 print(clearMessage)
